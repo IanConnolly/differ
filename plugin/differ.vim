@@ -26,7 +26,7 @@ highlight default link SignifySignDelete GitGuitterDelete
 
 let s:previous_lines = {}
 
-function Differ()
+function! Differ()
   let buffer = expand('%')
   let previous_lines = get(s:previous_lines, buffer, [])
   for i in previous_lines
@@ -42,7 +42,7 @@ function Differ()
   endif
 endfunction
 
-function s:DiffUpdate(lines, buffer)
+function! s:DiffUpdate(lines, buffer)
   for line in a:lines
     if strlen(line) > 0
       " call append(line('$'), line)
@@ -56,7 +56,7 @@ function s:DiffUpdate(lines, buffer)
   endfor
 endfunction
 
-function s:JobHandler(job_id, data, event)
+function! s:JobHandler(job_id, data, event)
   if a:event == 'stdout'
     call s:DiffUpdate(a:data, self.buffer)
   elseif a:event == 'stderr'
