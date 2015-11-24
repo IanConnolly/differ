@@ -27,6 +27,10 @@ highlight default link SignifySignDelete GitGuitterDelete
 let s:previous_lines = {}
 
 function! Differ()
+  if &ft == 'qf'
+    return
+  endif
+
   let buffer = expand('%')
   let previous_lines = get(s:previous_lines, buffer, [])
   for i in previous_lines
