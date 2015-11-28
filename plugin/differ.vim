@@ -1,29 +1,29 @@
-sign define DifferAdd text=+ texthl=GitGutterAdd
-sign define DifferMod text=~ texthl=GitGutterChange
-sign define DifferMod1 text=!1 texthl=GitGutterChange
-sign define DifferMod2 text=!2 texthl=GitGutterChange
-sign define DifferMod3 text=!3 texthl=GitGutterChange
-sign define DifferMod4 text=!4 texthl=GitGutterChange
-sign define DifferMod5 text=!5 texthl=GitGutterChange
-sign define DifferMod6 text=!6 texthl=GitGutterChange
-sign define DifferMod7 text=!7 texthl=GitGutterChange
-sign define DifferMod8 text=!8 texthl=GitGutterChange
-sign define DifferMod9 text=!9 texthl=GitGutterChange
-sign define DifferDel text=__ texthl=GitGutterDelete
-sign define DifferDel1 text=_1 texthl=GitGutterDelete
-sign define DifferDel2 text=_2 texthl=GitGutterDelete
-sign define DifferDel3 text=_3 texthl=GitGutterDelete
-sign define DifferDel4 text=_4 texthl=GitGutterDelete
-sign define DifferDel5 text=_5 texthl=GitGutterDelete
-sign define DifferDel6 text=_6 texthl=GitGutterDelete
-sign define DifferDel7 text=_7 texthl=GitGutterDelete
-sign define DifferDel8 text=_8 texthl=GitGutterDelete
-sign define DifferDel9 text=_9 texthl=GitGutterDelete
+sign define DifferAdd text=+ texthl=DifferAdd
+sign define DifferMod text=~ texthl=DifferChange
+sign define DifferMod1 text=!1 texthl=DifferChange
+sign define DifferMod2 text=!2 texthl=DifferChange
+sign define DifferMod3 text=!3 texthl=DifferChange
+sign define DifferMod4 text=!4 texthl=DifferChange
+sign define DifferMod5 text=!5 texthl=DifferChange
+sign define DifferMod6 text=!6 texthl=DifferChange
+sign define DifferMod7 text=!7 texthl=DifferChange
+sign define DifferMod8 text=!8 texthl=DifferChange
+sign define DifferMod9 text=!9 texthl=DifferChange
+sign define DifferDel text=__ texthl=DifferDelete
+sign define DifferDel1 text=_1 texthl=DifferDelete
+sign define DifferDel2 text=_2 texthl=DifferDelete
+sign define DifferDel3 text=_3 texthl=DifferDelete
+sign define DifferDel4 text=_4 texthl=DifferDelete
+sign define DifferDel5 text=_5 texthl=DifferDelete
+sign define DifferDel6 text=_6 texthl=DifferDelete
+sign define DifferDel7 text=_7 texthl=DifferDelete
+sign define DifferDel8 text=_8 texthl=DifferDelete
+sign define DifferDel9 text=_9 texthl=DifferDelete
 sign define DifferDummy
 
-highlight default link SignifySignAdd    GitGutterAdd
-highlight default link SignifySignChange GitGutterChange
-highlight default link SignifySignDelete GitGuitterDelete
+highlight default link DifferAdd    GitGutterAdd
+highlight default link DifferChange GitGutterChange
+highlight default link DifferDelete GitGutterDelete
 
 let s:previous_lines = {}
 
