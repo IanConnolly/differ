@@ -27,7 +27,7 @@ highlight default link DifferDelete GitGutterDelete
 
 let s:previous_lines = {}
 
-function! Differ()
+function! differ#Differ()
   if &ft == 'qf' || &ft == 'terminal'
     return
   endif
