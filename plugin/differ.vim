@@ -19,13 +19,13 @@ sign define DifferDel6 text=_6 texthl=GitGutterDelete
 sign define DifferDel7 text=_7 texthl=GitGutterDelete
 sign define DifferDel8 text=_8 texthl=GitGutterDelete
 sign define DifferDel9 text=_9 texthl=GitGutterDelete
+sign define DifferDummy
 
 highlight default link SignifySignAdd    GitGutterAdd
 highlight default link SignifySignChange GitGutterChange
 highlight default link SignifySignDelete GitGuitterDelete
 
 let s:previous_lines = {}
-sign define DifferDummy
 
 function! Differ()
   if &ft == 'qf' || &ft == 'terminal'
