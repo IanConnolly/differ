@@ -35,14 +35,18 @@ function! Differ()
   let buffer = expand('%')
   let previous_lines = get(s:previous_lines, buffer, [])
 
-  if len(previous_lines) == 0
-    execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. buffer
+  if get(g:, "differ_always_show_sign_column", 0)
+    if len(previous_lines) == 0
+      execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. buffer
+    endif
   endif
 
   for i in previous_lines
     execute 'sign unplace' i
-    if i == 1
-      execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. buffer
+    if get(g:, "differ_always_show_sign_column", 0)
+      if i == 1
+        execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. buffer
+      endif
     endif
   endfor
   let s:previous_lines[buffer] = []
@@ -63,8 +67,10 @@ function! s:DiffUpdate(lines, buffer)
       let sym = i_sym[1]
       call add(s:previous_lines[a:buffer], eval(i))
 
-      if i == 1
-        execute 'sign unplace' i
+      if get(g:, "differ_always_show_sign_column", 0)
+        if i == 1
+          execute 'sign unplace' i
+        endif
       endif
 
       execute 'sign place' i 'line='. eval(i) 'name='. sym 'file='. a:buffer
