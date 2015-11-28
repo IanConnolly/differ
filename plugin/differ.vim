@@ -28,7 +28,7 @@ let s:previous_lines = {}
 sign define DifferDummy
 
 function! Differ()
-  if &ft == 'qf'
+  if &ft == 'qf' || &ft == 'terminal'
     return
   endif
 
