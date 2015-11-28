@@ -25,6 +25,7 @@ highlight default link SignifySignChange GitGutterChange
 highlight default link SignifySignDelete GitGuitterDelete
 
 let s:previous_lines = {}
+sign define DifferDummy
 
 function! Differ()
   if &ft == 'qf'
@@ -33,36 +34,52 @@ function! Differ()
 
   let buffer = expand('%')
   let previous_lines = get(s:previous_lines, buffer, [])
-  for i in previous_lines
-    execute 'sign unplace' i
-  endfor
+
+  if len(previous_lines) == 0
+    execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. buffer
+  endif
+
   let s:previous_lines[buffer] = []
 
   if has('nvim')
-    call jobstart(['annotate-differ', buffer], extend({'buffer': buffer}, s:callbacks))
+    call jobstart(['annotate-differ', buffer], extend({'buffer': buffer, 'previous': previous_lines}, s:callbacks))
   else
     let diff = system('annotate-differ ' . buffer)
     call s:DiffUpdate(split(diff, '\n'), buffer)
   endif
 endfunction
 
-function! s:DiffUpdate(lines, buffer)
+function! s:DiffUpdate(lines, buffer, previous)
   for line in a:lines
     if strlen(line) > 0
-      " call append(line('$'), line)
       let i_sym = split(line, '=')
       let i = i_sym[0]
       let sym = i_sym[1]
       call add(s:previous_lines[a:buffer], eval(i))
 
+      if i == 1
+        execute 'sign unplace' i
+      endif
       execute 'sign place' i 'line='. eval(i) 'name='. sym 'file='. a:buffer
     endif
   endfor
+
+  let new_lines = get(s:previous_lines, a:buffer, [])
+  " Stop flickering
+  for i in a:previous
+    if index(new_lines, eval(i)) < 0
+      execute 'sign unplace' i
+      if i == 1
+        execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. a:buffer
+      endif
+    endif
+  endfor
+
 endfunction
 
 function! s:JobHandler(job_id, data, event)
   if a:event == 'stdout'
-    call s:DiffUpdate(a:data, self.buffer)
+    call s:DiffUpdate(a:data, self.buffer, self.previous)
   elseif a:event == 'stderr'
     echoerr join(a:data, '\n')
   endif
