@@ -67,7 +67,7 @@ function! s:DiffUpdate(lines, buffer, previous)
   let new_lines = get(s:previous_lines, a:buffer, [])
   " Stop flickering
   for i in a:previous
-    if index(new_lines, eval(i)) < 0
+    if index(new_lines, i) < 0
       execute 'sign unplace' i
       if i == 1
         execute 'sign place' 1 'line='. eval(1) 'name='. 'DifferDummy' 'file='. a:buffer
